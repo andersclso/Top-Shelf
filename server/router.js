@@ -5,4 +5,7 @@ router.route('/biz')
   .get(controller.get)
   .post(controller.post)
 
+router.route('/fakeData')
+  .post(controller.postFakerData)
+
 module.exports = router;

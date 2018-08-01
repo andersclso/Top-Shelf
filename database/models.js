@@ -10,7 +10,13 @@ const bizSchema = mongoose.Schema({
   review_count: { type: Number, require: true },
   price: { type: String, require: true },
   category: { type: String, require: true },
-  address: { type: String, require: true },
+  address: {
+    street: { type: String, require: true },
+    city: { type: String, require: true },
+    state: { type: String, require: true },
+    zip: { type: String, require: true },
+    country: { type: String, require: true }
+  },
   website: { type: String, require: true },
   email: { type: String, require: true },
   phone: { type: String, require: true }
