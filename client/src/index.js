@@ -37,33 +37,7 @@ class TopShelf extends React.Component {
 
   componentDidMount() {
     console.log('Component Mounted!');
-    axios.get('/main/biz', {
-        params: {
-          name: 'Jacobson, Jaskolski and Kreiger'
-        }
-      })
-      .then((response) => {
-
-        let biz = response.data[0];
-
-        this.setState({
-          businessInfo: {
-            id: biz.id,
-            alias: biz.alias,
-            name: biz.name,
-            claimed: biz.claimed,
-            rating: biz.rating,
-            review_count: biz.review_count,
-            price: biz.price,
-            category: biz.category,
-            address: biz.address,
-            website: biz.website,
-            email: biz.email,
-            phone: biz.phone
-          }
-        });
-      })
-      .catch(error => console.log(error));
+    this.FetchBusinessData()
   }
 
   FindSearchChange(e) {
@@ -74,6 +48,43 @@ class TopShelf extends React.Component {
     axios.post('/main/fakeData')
       .then((response) => {
         console.log(response);
+      })
+      .catch(error => console.log(error));
+  }
+
+  FetchBusinessData() {
+    axios.get('http://localhost:3006/main/biz', {
+        params: {
+          name: 'Jacobson, Jaskolski and Kreiger'
+        }
+      })
+      .then((response) => {
+
+        if (response.data.length) {
+
+          let biz = response.data[0];
+
+          this.setState({
+            businessInfo: {
+              id: biz.id,
+              alias: biz.alias,
+              name: biz.name,
+              claimed: biz.claimed,
+              rating: biz.rating,
+              review_count: biz.review_count,
+              price: biz.price,
+              category: biz.category,
+              address: biz.address,
+              website: biz.website,
+              email: biz.email,
+              phone: biz.phone
+            }
+          });
+        }
+        else {
+          this.DataGen();
+          this.FetchBusinessData();
+        }
       })
       .catch(error => console.log(error));
   }

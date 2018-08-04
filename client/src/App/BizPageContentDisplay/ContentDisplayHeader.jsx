@@ -214,7 +214,6 @@ function ContentDisplayHeader(props) {
 
   let biz_rating = () => {
     let rating = '' + props.rating;
-    console.log(typeof rating);
     let link;
 
     switch(rating) {

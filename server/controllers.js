@@ -24,6 +24,31 @@ const controller = {
   postFakerData: (req ,res) => {
     console.log('controller.postFakerData was called!');
 
+    new Biz({
+      id: "1d711308-4f4a-45eb-81a5-a02bcbf7b585",
+      alias: "Heaney, Armstronga and Schumm",
+      name: "Jacobson, Jaskolski and Kreiger",
+      claimed: true,
+      rating: 1.5,
+      review_count: 2047,
+      price: "1",
+      category: "Beauty",
+      address: {
+        street: "Pagac Path",
+        city: "Alenatown",
+        state: "Tennassee",
+        zip: "31829-0299",
+        country: "PS"
+      },
+      website: "https://gabe.info",
+      email: "Kathlyn80@gmail.com",
+      phone: "551.873.1003 x115"
+    }).save((error) => {
+      if (error) {
+        console.log(error);
+      }
+    });
+
     for (let i = 0; i < 100; i++) {
       let business = new Biz({
         id: faker.random.uuid(),
