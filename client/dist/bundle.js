@@ -15138,7 +15138,7 @@ var TopShelf = function (_React$Component) {
     value: function FetchBusinessData() {
       var _this2 = this;
 
-      axios.get('http://localhost:3006/main/biz', {
+      axios.get('http://ec2-54-153-70-61.us-west-1.compute.amazonaws.com/main/biz', {
         params: {
           name: 'Jacobson, Jaskolski and Kreiger'
         }
