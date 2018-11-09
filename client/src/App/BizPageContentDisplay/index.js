@@ -7,7 +7,6 @@ import styled from 'styled-components';
 const ContentDisplayMainWrapper = styled.div`
   width: 996px;
   margin: 0 auto;
-  
 `;
 
 function BizPageContentDisplay(props) {

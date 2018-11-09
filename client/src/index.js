@@ -32,7 +32,7 @@ class TopShelf extends React.Component {
       }
     }
 
-    this.DataGen = this.DataGen.bind(this);
+    this.FetchBusinessData = this.FetchBusinessData.bind(this);
   }
 
   componentDidMount() {
@@ -40,33 +40,22 @@ class TopShelf extends React.Component {
     this.FetchBusinessData()
   }
 
-  FindSearchChange(e) {
-
-  }
-
-  DataGen() {
-    axios.post('/main/fakeData')
-      .then((response) => {
-        console.log(response);
-      })
-      .catch(error => console.log(error));
-  }
-
-  FetchBusinessData() {
-    axios.get('http://ec2-54-153-70-61.us-west-1.compute.amazonaws.com/main/biz', {
+  FetchBusinessData(businessName = 'Gaylord - Schmidt', location) {
+    console.log(`FetchBusinessData was invoked with: ${businessName} and ${location}`);
+    axios.get('/main/biz', {
         params: {
-          name: 'Jacobson, Jaskolski and Kreiger'
+          name: businessName,
+          location: location
         }
       })
       .then((response) => {
+        if (response.data) {
 
-        if (response.data.length) {
-
-          let biz = response.data[0];
+          let biz = response.data;
 
           this.setState({
             businessInfo: {
-              id: biz.id,
+              id: biz.bus_id,
               alias: biz.alias,
               name: biz.name,
               claimed: biz.claimed,
@@ -74,16 +63,19 @@ class TopShelf extends React.Component {
               review_count: biz.review_count,
               price: biz.price,
               category: biz.category,
-              address: biz.address,
+              address: {
+                street: biz.street,
+                city: biz.city,
+                country: biz.country,
+                zip: biz.zip
+              },
               website: biz.website,
               email: biz.email,
               phone: biz.phone
             }
           });
-        }
-        else {
-          this.DataGen();
-          this.FetchBusinessData();
+        } else {
+          console.log('Cannot find business with this name!');
         }
       })
       .catch(error => console.log(error));
@@ -92,7 +84,7 @@ class TopShelf extends React.Component {
   render() {
     return (
       <TopShelfWrapper className="top-shelf">
-        <BizPageMainHeader />
+        <BizPageMainHeader businessSearch={this.FetchBusinessData} />
         <BizPageContentDisplay businessInfo={this.state.businessInfo} />
       </TopShelfWrapper>
     )

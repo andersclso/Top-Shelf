@@ -1,11 +1,8 @@
 const router = require('express').Router();
-const controller = require('./controllers.js');
+const controller = require('./controllers');
 
 router.route('/biz')
-  .get(controller.get)
-  .post(controller.post)
-
-router.route('/fakeData')
-  .post(controller.postFakerData)
+  .get(controller.getBusinessData)
+  .post(controller.postBusinessData)
 
 module.exports = router;

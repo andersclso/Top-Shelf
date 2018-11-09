@@ -2,7 +2,6 @@ const connection = require('./index.js');
 const mongoose = require('mongoose');
 
 const bizSchema = mongoose.Schema({
-  id: { type: String, require: true },
   alias: { type: String, require: true},
   name: { type: String, require: true },
   claimed: { type: Boolean, require: true },

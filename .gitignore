@@ -1,1 +1,10 @@
-node_modules
+# Dependency directories
+node_modules/
+
+#CSV files
+*.csv
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

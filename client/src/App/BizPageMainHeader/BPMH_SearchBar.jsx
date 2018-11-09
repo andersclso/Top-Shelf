@@ -72,6 +72,10 @@ const Input = styled.input`
   height: 20px;
   border: none;
   font-size: 14px;
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 const FindNearTitle = styled.span`
@@ -135,21 +139,20 @@ const DownArrowIcon = styled.img`
 `;
 
 function BPMH_SearchBar(props) {
-
   return (
     <MainHeaderWrapper>
       <MainHeaderBar>
         <a href="https://www.yelp.com"><YelpLogo src="https://s3.us-east-2.amazonaws.com/fecyelptopheader/searchbar/Yelp_trademark_RGB.png"/></a>
-        <SearchBarForm>
+        <SearchBarForm name="searchBarForm" onSubmit={props.searchBarSubmit}>
           <FindBarWrapper className="find-bar-wrapper">
             <FindNearTitle className="find-title">Find</FindNearTitle>
-            <Input name="find-input" placeholder="auto repair, burgers, spas..."/>
+            <Input name="find-input" placeholder="auto repair, burgers, spas..." onChange={props.findInputChange} />
           </FindBarWrapper>
           <NearBarWrapper className="near-bar-wrapper">
             <FindNearTitle className="near-title">Near</FindNearTitle>
-            <Input name="near-input" placeholder="Current Location"/>
+            <Input name="near-input" placeholder="Current Location" onChange={props.nearInputChange} />
           </NearBarWrapper>
-          <SearchButton className="navButton" type="submit" form="searchBarForm">
+          <SearchButton className="navButton" type="submit">
             <SearchButtonIcon src="https://s3.us-east-2.amazonaws.com/fecyelptopheader/searchbar/searchIcon.png"/>
           </SearchButton>
         </SearchBarForm>
